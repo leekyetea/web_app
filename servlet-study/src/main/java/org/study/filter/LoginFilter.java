@@ -1,6 +1,9 @@
 package org.study.filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,12 +17,17 @@ import javax.servlet.http.HttpSession;
 import org.study.dao.User;
 
 public class LoginFilter implements Filter {
-
+	
+	FilterConfig config;
+	String[] excludedUrls;
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -33,12 +41,21 @@ public class LoginFilter implements Filter {
 		
 		System.out.println(path.toString());
 		
+		for (String url : excludedUrls) {
+			if (path.toString().equals(url)) {
+				chain.doFilter(request, response);
+				
+				return;
+			}
+		}
+		/*
 		if (path.toString().equals("/index.jsp") || path.toString().equals("/")
 				|| path.toString().equals("/LoginServlet")) {
 			chain.doFilter(request, response);
 			
 			return;
-		} 
+		}
+		*/
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
@@ -56,8 +73,16 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-
+		this.config = arg0;
+		String s = config.getInitParameter("excluded");
+		//System.out.println(s);
+		excludedUrls = s.split(",");
+		
+		for (int i = 0; i < excludedUrls.length; i++) {
+			excludedUrls[i] = excludedUrls[i].trim(); 
+		}
+		
+		//System.out.println(Arrays.toString(urls));
 	}
 
 }
