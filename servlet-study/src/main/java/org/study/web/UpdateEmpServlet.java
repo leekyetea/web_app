@@ -21,7 +21,7 @@ public class UpdateEmpServlet extends HttpServlet{
 	 * 1. 데이터 베이스에 접근 해서,
 	 * 2. select * from user;
 	 * 3. 추출된 값을 리스트에 담아서 클라이언트에게 답
-	 * 
+	 *   
 	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
