@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>Welcome!!!</title>
 </head>
 <body>
-	<h2>ABC Company</h2>
-	<h3>Hello ${user }</h3>
+	<a href="/helloworldwebapp/index.jsp">Login</a> |
+	<a href="/helloworldwebapp/logout">Logout</a> |
+	<a href="/helloworldwebapp/profile">Profile</a>
 </body>
 </html>

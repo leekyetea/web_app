@@ -7,6 +7,7 @@
 <meta charset="EUC-KR">
 <title>Login Page</title>
 </head>
+<jsp:include page="link.jsp" flush="false" />
 <body>
 	<h1>ABC Company</h1>
 	<form action='/helloworldwebapp/login' method='post'>
