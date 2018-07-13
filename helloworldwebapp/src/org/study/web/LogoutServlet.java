@@ -17,7 +17,8 @@ public class LogoutServlet extends HttpServlet  {
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
 		
-		request.setAttribute("error", "성공적으로 로그아웃 되었습니다");
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		//request.setAttribute("error", "성공적으로 로그아웃 되었습니다.");
+		//request.getRequestDispatcher("index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/index.jsp?msg=logout");
 	}
 }

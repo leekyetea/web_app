@@ -17,4 +17,10 @@
 		<input type='submit' value='login' />
 	</form>
 </body>
+<script>
+	var result = '${param.msg}'
+	if (result == 'logout') {
+		alert('성공적으로 로그아웃 하셨습니다')
+	}
+</script>
 </html>
