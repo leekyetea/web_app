@@ -5,4 +5,22 @@
 			http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>Archetype Created Web Application</display-name>
+	
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>org.study.filter.LoginFilter</filter-class>
+		<init-param>
+			<param-name>excluded</param-name>
+			<param-value>
+				/,/index.jsp,/login
+			</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>
+			/*
+		</url-pattern>
+	</filter-mapping>
 </web-app>

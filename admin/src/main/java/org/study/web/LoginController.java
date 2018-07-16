@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.study.dao.UserDao;
 import org.study.model.User;
@@ -19,15 +20,16 @@ public class LoginController extends HttpServlet{
 		throws IOException, ServletException {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
+		String orgPath = request.getParameter("orgReqPath");
 		
 		UserDao dao = new UserDao();
 		
 		User user = dao.authenticateUser(id, pw);
-		System.out.println("id: " + id + " pw: " + pw);
 		// 인증
 		if (user != null) {	// 인증 성공
-			System.out.println("login success: " + user.getName());
-			response.sendRedirect("apply");
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			response.sendRedirect(orgPath);
 		} else {
 			request.setAttribute("error", "주어진 정보가 맞지않습니다.");
 			request.getRequestDispatcher("index.jsp").forward(request, response);

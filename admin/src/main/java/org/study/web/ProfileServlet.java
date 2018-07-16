@@ -11,29 +11,17 @@ import javax.servlet.http.HttpSession;
 
 import org.study.model.User;
 
-@WebServlet("/apply")
-public class ApplyFormController extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException {
 		
-//		HttpSession session = request.getSession();
-//		User user = (User) session.getAttribute("user");
-		
-		/*if (user != null) {
-			request.setAttribute("name", user.getName());
-			request.getRequestDispatcher("/WEB-INF/views/applyForm.jsp").forward(request, response);
-		} else {
-			request.setAttribute("error", "먼저 로그인 하세요");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}*/
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
 		request.setAttribute("name", user.getName());
-		request.getRequestDispatcher("/WEB-INF/views/applyForm.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
 	}
 }
