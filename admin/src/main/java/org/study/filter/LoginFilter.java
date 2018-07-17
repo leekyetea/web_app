@@ -53,7 +53,7 @@ public class LoginFilter implements Filter{
 		} else {
 			req.setAttribute("error", "먼저 로그인 하세요");
 			req.setAttribute("orgReqPath", path );
-			req.getRequestDispatcher("index.jsp").forward(request, response);
+			req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		}
 		
 		return;

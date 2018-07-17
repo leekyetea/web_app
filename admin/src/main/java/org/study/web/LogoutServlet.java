@@ -24,7 +24,7 @@ public class LogoutServlet extends HttpServlet{
 		if (user != null) {
 			session.invalidate();
 			
-			response.sendRedirect("/index.jsp");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
 			request.setAttribute("error", "먼저 로그인 하세요");
 			request.getRequestDispatcher("index.jsp").forward(request, response);

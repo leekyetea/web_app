@@ -30,12 +30,13 @@
 
 	<div class="container">
 		<h1>Hyundai 직업전문학교</h1>
-		
-		<h3>환영합니다</h3>
-		
-		<div>
-			<a href="${pageContext.request.contextPath }/login">Login</a>
-		</div>
+		<form action='${pageContext.request.contextPath }/login' method='post'>
+			<input type="hidden" name="orgReqPath" value="${orgReqPath }" />
+			<div style="color: red">${error}</div>
+			ID: <input type='text' name='id'><br /> Password: <input
+				type='password' name='pw'><br /> <input type='submit'
+				value='login' />
+		</form>
 	</div>
 
 	<footer class="footer">
