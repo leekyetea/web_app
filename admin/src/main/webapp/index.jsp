@@ -1,47 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<html>
-<head>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
-<style>
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 60px;
-	background-color: #f5f5f5;
-}
-</style>
-</head>
-<body>
-	<nav class="navbar navbar-default">
-		<a href="/" class="navbar-brand">Brand</a>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="###">Home</a></li>
-			<li><a href="###">Apply</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="${pageContext.request.contextPath }/login">Login</a>
-			</li>
-		</ul>
-	</nav>
+<jsp:include page="/WEB-INF/views/header.jsp" flush="false" />
 
 	<div class="container">
 		<h1>Hyundai 직업전문학교</h1>
+
+		<c:choose>
+			<c:when test="${empty user }">
+				<h3>환영합니다, 손님
+				</h3>
+			</c:when>
+			<c:otherwise> 
+				<h3>${user.name }님, 환영합니다</h3>
+			</c:otherwise>
+		</c:choose>
 		
-		<h3>환영합니다</h3>
+		<ul>
+			<li>지원자는 로그인 후, 지원서 작성</li>
+			<li>지원 정보 확인은 프로파일</li>
+		</ul>
 		
-		<div>
-			<a href="${pageContext.request.contextPath }/login">Login</a>
-		</div>
 	</div>
 
-	<footer class="footer">
-		<div>서울현대 직업전문학교 ...</div>
-	</footer>
-</body>
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</html>
+<jsp:include page="/WEB-INF/views/footer.jsp" flush="false" />

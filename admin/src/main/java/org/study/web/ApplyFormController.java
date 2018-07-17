@@ -29,11 +29,13 @@ public class ApplyFormController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}*/
 		
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
-		request.setAttribute("name", user.getName());
 		request.getRequestDispatcher("/WEB-INF/views/applyForm.jsp").forward(request, response);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+		throws IOException, ServletException {
 		
 	}
 }
