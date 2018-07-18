@@ -8,10 +8,15 @@
 		<div>
 			<h3>
 				${name } Profile
-				....
+				
 			</h3>
 			
 		</div>
 	</div>
 
+<script>
+	if ('${param.msg}' == 'success') {
+		alert("지원서 제출 성공");
+	}
+</script>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="false" />

@@ -68,7 +68,7 @@ public class LoginFilter implements Filter{
 		
 		for (int i = 0; i < excludedUrls.length; i++) {
 			excludedUrls[i] = ctxPath + excludedUrls[i].trim();
-			System.out.println(excludedUrls[i]);
+			//System.out.println(excludedUrls[i]);
 		}
 	}
 

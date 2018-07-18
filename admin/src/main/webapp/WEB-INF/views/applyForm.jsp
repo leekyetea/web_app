@@ -8,15 +8,18 @@
 	<div>
 		<h3>${user.name } 지원서 작성</h3>
 
+		<div style="color:red">
+			${error }
+		</div>
 		<form action="${pageContext.request.contextPath }/apply" method="post">
-			<table>
+			<table class="table">
 				<tr>
 					<td>전공:</td>
 					<td><input type="text" name="major"></td>
 				</tr>
 				<tr>
 					<td>나이:</td>
-					<td><input type="text" name="age"></td>
+					<td><input type="date" name="dob"></td>
 				</tr>
 				<tr>
 					<td>이메일:</td>

@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet{
 		String pw = request.getParameter("pw");
 		String orgPath = request.getParameter("orgReqPath");
 		
-		System.out.println("orgPath: " + orgPath);
+		//System.out.println("orgPath: " + orgPath);
 		UserDao dao = new UserDao();
 		
 		User user = dao.authenticateUser(id, pw);
