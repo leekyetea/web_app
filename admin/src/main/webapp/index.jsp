@@ -25,3 +25,9 @@
 	</div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="false" />
+
+<script>
+	if ('${param.logout}' == 'success'){
+		alert("로그아웃 성공")
+	}
+</script>

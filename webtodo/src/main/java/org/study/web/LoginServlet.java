@@ -9,43 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.study.dao.UserDao;
-import org.study.model.User;
-
 @WebServlet("/login")
-public class LoginController extends HttpServlet{
+public class LoginServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		String orgPath = request.getParameter("orgReqPath");
 		
-		//System.out.println("orgPath: " + orgPath);
-		UserDao dao = new UserDao();
-		
-		User user = dao.authenticateUser(id, pw);
-		// 인증
-		if (user != null) {	// 인증 성공
+		System.out.println("id: " + id + " pw: " + pw);
+		if (pw.equals("1234")) {
+			//request.setAttribute("id", id);
 			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			if (orgPath.length() == 0) {
-				response.sendRedirect(request.getContextPath() + "/");
-			} else {
-				response.sendRedirect(orgPath);
-			}
-			
+			session.setAttribute("pw", pw);
+			response.sendRedirect("/webtodo/welcome");
 		} else {
-			request.setAttribute("error", "주어진 정보가 맞지않습니다.");
+			request.setAttribute("error", "주어진 정보가 맞지 않습니다. 다시 로그인하세요");
 			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		}
-		
 	}
 }

@@ -23,15 +23,20 @@
 			<li class="active"><a href="${pageContext.request.contextPath }/">Home</a></li>
 			<li><a href="${pageContext.request.contextPath }/apply">Apply</a></li>
 			<li><a href="${pageContext.request.contextPath }/profile">Profile</a></li>
+			<c:choose>
+				<c:when test="${empty user }">
+					<li><a href="${pageContext.request.contextPath }/join">Join</a></li>
+				</c:when>
+			</c:choose>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<c:choose>
 				<c:when test="${empty user }">
-					<li><a href="${pageContext.request.contextPath }/login">Login</a>
+					<li><a style="margin-right:10;" href="${pageContext.request.contextPath }/login">Login</a>
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${pageContext.request.contextPath }/logout">Logout</a>
+					<li><a style="margin-right:10;" href="${pageContext.request.contextPath }/logout">Logout</a>
 					</li>
 				</c:otherwise>
 			</c:choose>

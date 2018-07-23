@@ -1,10 +1,39 @@
 package org.study.model;
 
+import java.sql.Date;
+
 public class User {
 
 	private String id;
 	private String name;
 	private String pw;
+	private Date dob;
+	private String email;
+	private Country country;
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 
 	public String getId() {
 		return id;
@@ -32,7 +61,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + "]";
+		return "User [id=" + id + ", name=" + name + ", dob=" + dob + ", email=" + email + ", country=" + country + "]";
 	}
 
 }

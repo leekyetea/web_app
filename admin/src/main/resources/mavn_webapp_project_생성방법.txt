@@ -1,0 +1,15 @@
+Eclipse Maven Webapp project 생성
+1. New Maven project
+2. maven-archetype-webapp archetype선택
+3.artifactId를 입력하고 finish하여 프로젝트 생성
+4. src/main/webapp/index.jsp 파일에 error가 발생 --> server runtime (tomcat server)를 빌드패스에 추가
+5. web.xml의 web-app tag의 버젼을 2.3 --> 2.5 로 업그레이드
+6. pom.xml수정
+ maven-compiler-plugin 추가....
+7. project facets properties에서 
+ dynamic web module version: 2.5, 
+ java version: 1.8 로 수정.... 
+  --> issue (webcontent 폴더가 생길수 있음--> 지워버려야 함)
+8. maven update project 수행
+
+

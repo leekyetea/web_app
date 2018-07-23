@@ -29,6 +29,38 @@ public class UserDao {
 		return null;
 	}
 	
+	public boolean addUser(User user) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		int result;
+		
+		if (conn != null && user != null) {
+			String sql = "insert into hd_user (id, pw, name, dob, email, country) " +
+					" values (?, ?, ?, ?, ?, ?)";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, user.getId());
+				ps.setString(2, user.getPw());
+				ps.setString(3, user.getName());
+				ps.setDate(4, user.getDob());
+				ps.setString(5, user.getEmail());
+				ps.setString(6, user.getCountry().name());
+				
+				result = ps.executeUpdate();
+				
+				if (result == 0) {
+					return false;
+				} else {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
+	
 	public User authenticateUser(String id, String pw) {
 		Connection conn = getConnection();
 		PreparedStatement ps = null;
