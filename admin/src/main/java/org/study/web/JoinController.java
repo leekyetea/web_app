@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.study.dao.UserDao;
 import org.study.model.Country;
 import org.study.model.User;
 
@@ -41,6 +42,14 @@ public class JoinController extends HttpServlet {
 		user.setEmail(email);
 		user.setCountry(Country.getCountry(country));
 		
-		System.out.println(user);
+		//System.out.println(user);
+		UserDao dao = new UserDao();
+		if (dao.addUser(user)) {	// 사용자 추가 성공
+			request.setAttribute("error", "사용자 추가가 성공했습니다. 로그인 하세요");
+			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+		} else {
+			request.setAttribute("error", "사용자 추가 실패");
+			request.getRequestDispatcher("/WEB-INF/views/joinForm.jsp").forward(request, response);
+		}
 	}
 }

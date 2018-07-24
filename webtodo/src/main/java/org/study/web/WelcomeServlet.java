@@ -20,7 +20,7 @@ public class WelcomeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String pw = (String) session.getAttribute("pw");
 		System.out.println("pw: " + pw);
-		
+		//session.setAttribute("pw", null);
 		request.getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(request, response);
 	}
 }

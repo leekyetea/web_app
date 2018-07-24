@@ -9,4 +9,9 @@
 		<h3>PW: ${sessionScope.pw }</h3>
 	</div>
 
+<%
+session.setAttribute("pw", null);
+
+%>
+
 

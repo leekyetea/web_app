@@ -12,7 +12,7 @@
 		<init-param>
 			<param-name>excluded</param-name>
 			<param-value>
-				/,/index.jsp,/login,/join
+				/,/index.jsp,/login,/join,/idcheck
 			</param-value>
 		</init-param>
 	</filter>

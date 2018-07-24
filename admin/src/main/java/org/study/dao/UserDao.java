@@ -121,7 +121,62 @@ public class UserDao {
 		return null;
 	}
 	
-	public boolean existUserId(String id) {
-		return false;
+	/*
+	 * return:
+	 * 		1 --> 사용자 아이디가 존재
+	 * 		0 --> 사용자 아이디가 존재 안함
+	 * 		-1--> 실행오류
+	 */
+	public int existUserId(String id) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		if (conn != null) {
+			String sql = "select * from hd_user where id=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				
+				rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					return 1;
+				} else {
+					return 0;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		return -1;
 	}
 }
