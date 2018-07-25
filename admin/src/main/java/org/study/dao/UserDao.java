@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.study.model.User;
+import org.study.sec.PasswordAuthentication;
 
 public class UserDao {
 	private Connection conn;
@@ -38,9 +39,11 @@ public class UserDao {
 			String sql = "insert into hd_user (id, pw, name, dob, email, country) " +
 					" values (?, ?, ?, ?, ?, ?)";
 			try {
+				PasswordAuthentication passAuth = new PasswordAuthentication();
+				
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, user.getId());
-				ps.setString(2, user.getPw());
+				ps.setString(2, passAuth.hash(user.getPw().toCharArray()));
 				ps.setString(3, user.getName());
 				ps.setDate(4, user.getDob());
 				ps.setString(5, user.getEmail());
@@ -67,22 +70,27 @@ public class UserDao {
 		ResultSet rs = null;
 		
 		if (conn != null) {
-			String sql = "select id, pw, name from hd_user where id=? and pw=?";
+			String sql = "select id, pw, name from hd_user where id=?";
 			try {
+				PasswordAuthentication passAuth = new PasswordAuthentication();
+				
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, id);
-				ps.setString(2, pw);
 				
 				rs = ps.executeQuery();
 				
 				if (rs.next()) {
-					String name = rs.getString(3);
-					User user = new User();
-					user.setId(id);
-					user.setPw(pw);
-					user.setName(name);
-					
-					return user;
+					if (passAuth.authenticate(pw.toCharArray(), rs.getString(2))) {
+						String name = rs.getString(3);
+						User user = new User();
+						user.setId(id);
+						user.setPw(pw);
+						user.setName(name);
+						
+						return user;
+					} else {
+						return null;
+					}
 				} else {
 					return null;
 				}
