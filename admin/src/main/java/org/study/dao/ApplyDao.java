@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.study.model.Application;
-import org.study.model.User;
+import org.study.model.Semester;
 
 public class ApplyDao {
 
@@ -67,7 +69,7 @@ public class ApplyDao {
 				ps.setString(1, application.getUserId());
 				ps.setString(2, application.getMajor());
 				ps.setString(3, application.getSemester().name());
-				ps.setString(4, application.getApplyDesc());
+				ps.setString(4, application.getApplyDesc().trim());
 				
 				result = ps.executeUpdate();
 				
@@ -122,6 +124,64 @@ public class ApplyDao {
 	}
 	
 	public Application[] getApplications(String userId) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		if (conn != null) {			
+			String sql = "select * from hd_application" + 
+					" where userid=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, userId);
+				
+				rs = ps.executeQuery();
+				
+				List<Application> list = new ArrayList<>();
+				while (rs.next()) {
+					Application application = new Application(userId);
+					
+					application.setMajor(rs.getString(2));
+					application.setSemester(Semester.getSemester(rs.getString(3)));
+					application.setApplyDesc(rs.getString(4));
+					
+					list.add(application);
+				}
+				
+				return list.toArray(new Application[0]);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {		
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
 		return null;
 	}
 }

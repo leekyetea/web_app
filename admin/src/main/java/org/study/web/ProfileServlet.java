@@ -1,6 +1,7 @@
 package org.study.web;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,9 @@ public class ProfileServlet extends HttpServlet {
 		ApplyDao dao = new ApplyDao();
 		Application[] applys = dao.getApplications(user.getId());
 		
-		request.setAttribute("application", applys);
+		//System.out.println(Arrays.toString(applys));
+		
+		request.setAttribute("applys", applys);
 		request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
 	}
 }
