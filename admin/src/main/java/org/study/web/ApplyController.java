@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.study.dao.ApplyDao;
 import org.study.model.Application;
 import org.study.model.Country;
+import org.study.model.Semester;
 import org.study.model.User;
 
 @WebServlet("/apply")
@@ -22,44 +23,23 @@ public class ApplyController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException {
-		
-//		HttpSession session = request.getSession();
-//		User user = (User) session.getAttribute("user");
-		
-		/*if (user != null) {
-			request.setAttribute("name", user.getName());
-			request.getRequestDispatcher("/WEB-INF/views/applyForm.jsp").forward(request, response);
-		} else {
-			request.setAttribute("error", "먼저 로그인 하세요");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}*/
-		
 		request.getRequestDispatcher("/WEB-INF/views/applyForm.jsp").forward(request, response);
-		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException {
 		String major = request.getParameter("major");
-		String dob = request.getParameter("dob");
-		String email = request.getParameter("email");
-		String country = request.getParameter("country");
-		
-		
+		String semester = request.getParameter("semester");
+		String applyDesc = request.getParameter("applyDesc");
+				
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		Application application = new Application(user.getId());
 
 		application.setMajor(major);
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			application.setDob(dateFormat.parse(dob));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		application.setEmail(email);
-		application.setCountry(Country.getCountry(country));
+		application.setSemester(Semester.getSemester(semester));
+		application.setApplyDesc(applyDesc);
 		
 		//System.out.println(application);
 		

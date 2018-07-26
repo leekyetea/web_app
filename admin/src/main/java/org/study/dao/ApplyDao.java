@@ -43,9 +43,7 @@ public class ApplyDao {
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, application.getUserId());
 				ps.setString(2, application.getMajor());
-				ps.setDate(3, new java.sql.Date(application.getDob().getTime()));
-				ps.setString(4, application.getEmail());
-				ps.setString(5, application.getCountry().name());
+
 				
 				result = ps.executeUpdate();
 				

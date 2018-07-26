@@ -18,26 +18,24 @@
 					<td><input type="text" name="major"></td>
 				</tr>
 				<tr>
-					<td>나이:</td>
-					<td><input type="date" name="dob"></td>
-				</tr>
-				<tr>
-					<td>이메일:</td>
-					<td><input type="email" name="email"></td>
-				</tr>
-				<tr>
-					<td>국적:</td>
-					<td><select id="coutry" name="country">
-							<option value="Korea">한국</option>
-							<option value="USA">미국</option>
-							<option value="UK">영국</option>
-							<option value="Misc">기타</option>
+					<td>지원학기: </td>
+					<td>
+						<select id="sem" name="semester">
+							<option value="spring">봄학기</option>
+							<option value="fall">가을학기</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-					<input type="submit" value="제출">
+					<td>지원동기</td>
+					<td>
+						<textarea rows="3" cols="20"  name="applyDesc">						
+						</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="1">
+						<input type='submit' value="제출">
 					</td>
 				</tr>
 			</table>

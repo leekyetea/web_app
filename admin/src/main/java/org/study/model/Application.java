@@ -6,10 +6,9 @@ public class Application {
 
 	String userId;
 	String major;
-	Date dob;
-	String email;
-	Country country;
-	
+	Semester semester;
+	String applyDesc;
+
 	public Application(String userId) {
 		this.userId = userId;
 	}
@@ -26,34 +25,26 @@ public class Application {
 		this.major = major;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Semester getSemester() {
+		return semester;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public void setSemester(Semester semester) {
+		this.semester = semester;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getApplyDesc() {
+		return applyDesc;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Country getCountry() {
-		return country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setApplyDesc(String applyDesc) {
+		this.applyDesc = applyDesc;
 	}
 
 	@Override
 	public String toString() {
-		return "Application [userId=" + userId + ", major=" + major + ", dob=" + dob + ", email=" + email + ", country="
-				+ country + "]";
+		return "Application [userId=" + userId + ", major=" + major + ", semester=" + semester + ", applyDesc="
+				+ applyDesc + "]";
 	}
 
 }
