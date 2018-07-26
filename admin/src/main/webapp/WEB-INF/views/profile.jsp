@@ -7,7 +7,7 @@
 		<h1>Hyundai 직업전문학교</h1>
 		<div>
 			<h3>
-				${name } Profile
+				${user.name } Profile
 				
 			</h3>
 			

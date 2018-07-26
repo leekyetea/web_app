@@ -29,7 +29,7 @@
 				<tr>
 					<td>지원동기</td>
 					<td>
-						<textarea rows="3" cols="20"  name="applyDesc">						
+						<textarea rows="3" cols="30" autofocus name="applyDesc">						
 						</textarea>
 					</td>
 				</tr>

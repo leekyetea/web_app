@@ -44,8 +44,12 @@ public class ApplyController extends HttpServlet {
 		//System.out.println(application);
 		
 		ApplyDao dao = new ApplyDao();
-		if (dao.submitApplication(application)) {
+		int result = dao.submitApplication(application);
+		if (result == 1) {
 			response.sendRedirect(request.getContextPath() + "/profile?msg=success");
+		} else if (result == -99) {
+			request.setAttribute("error", "이미 지원한 과정입니다");
+			request.getRequestDispatcher("WEB-INF/views/applyForm.jsp").forward(request, response);
 		} else {
 			request.setAttribute("error", "지원서 제출 실패하였습니다");
 			request.getRequestDispatcher("WEB-INF/views/applyForm.jsp").forward(request, response);
