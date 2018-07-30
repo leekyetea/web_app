@@ -51,8 +51,8 @@ public class ApplyDao {
 			String preSql = "select * from hd_application " + 
 					" where userId=? and major=? and semester=?";
 			
-			String sql = "insert into hd_application (userId, major, semester, applyDesc) " + 
-					"values (?, ?, ?, ?)";
+			String sql = "insert into hd_application (id, userId, major, semester, applyDesc) " + 
+					"values (apply_id_seq.nextval, ?, ?, ?, ?)";
 			try {
 				ps0 = conn.prepareStatement(preSql);
 				ps0.setString(1, application.getUserId());
@@ -183,5 +183,9 @@ public class ApplyDao {
 		}
 		
 		return null;
+	}
+	
+	public boolean deleteApplication(int id) {
+		return false;
 	}
 }

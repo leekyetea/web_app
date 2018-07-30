@@ -8,7 +8,22 @@
 		<h1>Hyundai 직업전문학교</h1>
 		<div>
 			<h3>
-				${user.name } Profile
+				${user.name }
+			</h3>
+			<table class="table">
+				<tr>
+					<th>생년월일</th>
+					<th>이메일</th>
+					<th>국적</th>
+				</tr>
+				<tr>
+					<td>${user.dob }</td>
+					<td>${user.email }</td>
+					<td>${user.country }</td>
+				</tr>
+			</table>
+			<h3>
+				지원현황
 			</h3>
 			<table class="table">
 				<tr>
@@ -22,6 +37,9 @@
 						<td>${application.major }</td>
 						<td>${application.semester } </td>
 						<td>${application.applyDesc } </td>
+						<td>
+							<button>Delete</button>
+						</td>
 					</tr>
 				</c:forEach>
 				
@@ -32,6 +50,12 @@
 <script>
 	if ('${param.msg}' == 'success') {
 		alert("지원서 제출 성공");
+	}
+	
+	if ('${del_msg}' == 'success') {
+		alert("지원서 삭제 성공");
+	} else if ('${del_msg}' == 'failure'){
+		alert("지원서를 삭제하는데 문제가 발생하였습니다");
 	}
 </script>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="false" />

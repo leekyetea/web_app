@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.study.model.Country;
 import org.study.model.User;
 import org.study.sec.PasswordAuthentication;
 
@@ -186,5 +187,63 @@ public class UserDao {
 		}
 		
 		return -1;
+	}
+	
+	public boolean getProfile(User user) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		if (conn != null && user != null) {
+			String sql = "select dob, email, country from hd_user " + 
+					"where id=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, user.getId());
+				
+				rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					user.setDob(rs.getDate(1));
+					user.setEmail(rs.getString(2));
+					user.setCountry(Country.getCountry(rs.getString(3)));
+					
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		return false;
 	}
 }
