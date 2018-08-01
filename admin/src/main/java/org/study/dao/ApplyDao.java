@@ -144,6 +144,7 @@ public class ApplyDao {
 					application.setMajor(rs.getString(2));
 					application.setSemester(Semester.getSemester(rs.getString(3)));
 					application.setApplyDesc(rs.getString(4));
+					application.setId(rs.getInt(5));
 					
 					list.add(application);
 				}
@@ -186,6 +187,47 @@ public class ApplyDao {
 	}
 	
 	public boolean deleteApplication(int id) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		int result;
+		
+		if (conn != null) {			
+			String sql = "delete from hd_application where id=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, id);
+				
+				result = ps.executeUpdate();
+				
+				if (result > 0) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {		
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
 		return false;
 	}
 }

@@ -15,6 +15,7 @@ import org.study.model.User;
 @WebServlet("/logout")
 public class LogoutController extends HttpServlet{
 
+	// logout do get method
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

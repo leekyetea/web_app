@@ -29,7 +29,7 @@
 				<tr>
 					<th>Major</th>
 					<th>Semeter</th>
-					<th>Description</th>
+					<th colspan="2">Description</th>
 				</tr>
 				<c:forEach items="${applys }" var="application">
 					<tr>
@@ -38,7 +38,7 @@
 						<td>${application.semester } </td>
 						<td>${application.applyDesc } </td>
 						<td>
-							<button>Delete</button>
+							<a href="${pageContext.request.contextPath }/delete?id=${application.id }">Delete</a>
 						</td>
 					</tr>
 				</c:forEach>

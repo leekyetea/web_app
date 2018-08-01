@@ -20,7 +20,21 @@ public class DeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException {
+		if (request.getParameter("id") == null) {
+			request.setAttribute("error", "잘못된 호출입니다");
+			request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+			
+			return;
+		}
+		
 		int id = Integer.parseInt(request.getParameter("id"));
+		
+		if (id <= 0) {
+			request.setAttribute("error", "잘못된 호출입니다(id <= 0)");
+			request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+			
+			return;
+		}
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -33,6 +47,9 @@ public class DeleteController extends HttpServlet {
 		} else {
 			request.setAttribute("del_msg", "failure");
 		}
+		
+		Application[] applys = dao.getApplications(user.getId());		
+		request.setAttribute("applys", applys);
 		
 		request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
 	}
