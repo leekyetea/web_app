@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.study.dao.MemberDao;
 import org.study.model.Member;
@@ -46,8 +47,10 @@ public class UpdateServlet extends HttpServlet {
 		
 		MemberDao dao = new MemberDao();
 		if (dao.updateMember(member)) {
-			
-			response.sendRedirect(request.getContextPath() + "/list?msg=success");
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", "success");
+			//response.sendRedirect(request.getContextPath() + "/list?msg=success");
+			response.sendRedirect(request.getContextPath() + "/list");
 		} else {
 			request.setAttribute("member", member);
 			request.setAttribute("error", "정보 수정에 실패했습니다");
