@@ -10,7 +10,7 @@
 	<h1>산업기사 쇼핑몰</h1>
 	<ul>
 		<li><a href="${pageContext.request.contextPath }/register">회원등록</a></li>
-		<li><a href="">회원조회</a></li>
+		<li><a href="${pageContext.request.contextPath }/list">회원조회</a></li>
 		<li><a href="">회원정보수정</a></li>
 		<li><a href="">회원매출조회</a></li>
 	</ul>

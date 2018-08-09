@@ -5,12 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	.error {
+		font-color: red	
+	}
+</style>
 </head>
 <body>
 	<h1>회원등록</h1>
 	
 	<form action="${pageContext.request.contextPath }/register" method="post">
-		${error }
+		<div class="error">${error }</div>
+		
 		<table>
 			<tr>
 				<td>
@@ -25,7 +31,7 @@
 					아이디: 
 				</td>
 				<td>
-					<input type="text" name="id"> 
+					<input type="text" name="id" > 
 				</td>
 			</tr>
 			<tr>
@@ -53,4 +59,7 @@
 		
 	</form>
 </body>
+<script>
+
+</script>
 </html>

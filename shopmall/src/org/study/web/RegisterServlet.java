@@ -60,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
 		// 데이터베이스에 정보를 저장
 		MemberDao dao = new MemberDao();
 		if (dao.insertMember(member)) {		// 회원 조회 페이지로 
-			
+			response.sendRedirect(request.getContextPath() + "/list");
 		} else {	// 다시 등록페이지로 
 			request.setAttribute("error", "등록이 실패하였습니다.");
 			request.getRequestDispatcher("/WEB-INF/views/registerForm.jsp").forward(request, response);
