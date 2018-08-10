@@ -236,4 +236,56 @@ public class MemberDao {
 		
 		return false;
 	}
+	
+	public boolean existId(String id) {
+		Connection conn = getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		if (conn != null) {
+			String sql = "select name from member where id=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				
+				rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return false;
+	}
 }

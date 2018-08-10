@@ -38,17 +38,18 @@
 		</tr>
 		</c:forEach>
 	</table>
-<%
+<%-- <%
 	String msg = (String)session.getAttribute("msg");
 	session.removeAttribute("msg");
-
-%>
+%> --%>
 
 <script>
-	var result = '<%=msg%>';
+	var result = '${msg}';
 	if (result == 'success') {
 		alert('정보 수정에 성공하였습니다')
 	}
 </script>
+
+<c:remove var="msg" scope="session" />
 </body>
 </html>
